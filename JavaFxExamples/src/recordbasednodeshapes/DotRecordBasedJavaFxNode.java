@@ -31,7 +31,7 @@ public /* abstract */ class DotRecordBasedJavaFxNode extends HBox {
 	private static Border RECORD_BORDER = new Border(
 			new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(0), BorderWidths.DEFAULT));
 	private static Border MRECORD_BORDER = new Border(
-			new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT));
+			new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(10), BorderWidths.DEFAULT));
 	private static Insets TEXT_MARGINS = new Insets(1.5f, 7, 1.5f, 7);
 
 	protected DotRecordBasedJavaFxNode(/* String dotLabel, boolean useRoundedBorders */) {
@@ -43,13 +43,10 @@ public /* abstract */ class DotRecordBasedJavaFxNode extends HBox {
 	public static DotRecordBasedJavaFxNode createExample01() {
 		RootNode root = new RootNode();
 
-		root.addText(" ");
-		// root.addLine();
-		// root.addText("B");
-		// root.addLine();
-		// root.addText("C");
-		// root.addLine();
-		// root.addText("D");
+		root.addText("A");
+		root.addText("B");
+		root.addText("C");
+		root.addText("D");
 
 		return root;
 	}
@@ -65,12 +62,9 @@ public /* abstract */ class DotRecordBasedJavaFxNode extends HBox {
 		node.addRotatedLabel(vbox);
 
 		vbox.addText("A");
-		// vbox.addLine();
-		// vbox.addText("B");
-		// vbox.addLine();
-		// vbox.addText("C");
-		// vbox.addLine();
-		// vbox.addText("D");
+		vbox.addText("B");
+		vbox.addText("C");
+		vbox.addText("D");
 
 		return node;
 	}
@@ -235,7 +229,7 @@ public /* abstract */ class DotRecordBasedJavaFxNode extends HBox {
 			firstFieldCheck();
 			Text text = new Text(string);
 			setMargin(text, TEXT_MARGINS);
-	        getChildren().add(text);
+			getChildren().add(text);
 		}
 
 		@Override
