@@ -84,12 +84,9 @@ public /* abstract */ class DotRecordBasedJavaFxNode extends HBox {
 		LabelNode vbox = node.provideChildNode();
 
 		node.addText("A");
-		node.addLine();
 		node.addRotatedLabel(vbox);
 		vbox.addText("B");
-		vbox.addLine();
 		vbox.addText("C");
-		node.addLine();
 		node.addText("D");
 
 		return node;
@@ -102,9 +99,7 @@ public /* abstract */ class DotRecordBasedJavaFxNode extends HBox {
 		RootNode node = new RootNode();
 
 		node.addText("left");
-		node.addLine();
 		node.addText("mid dle");
-		node.addLine();
 		node.addText("right");
 
 		return node;
@@ -117,7 +112,6 @@ public /* abstract */ class DotRecordBasedJavaFxNode extends HBox {
 		RootNode node = new RootNode();
 
 		node.addText("one");
-		node.addLine();
 		node.addText("two");
 
 		return node;
@@ -127,27 +121,20 @@ public /* abstract */ class DotRecordBasedJavaFxNode extends HBox {
 	 * label = "hello&#92;nworld |{ b |{c|<here> d|e}| f}| g | h"
 	 */
 	public static DotRecordBasedJavaFxNode createExample04_3() {
-		RootNode node = new RootNode(MRECORD_BORDER);
+		RootNode node = new RootNode();
 
 		LabelNode vbox = node.provideChildNode();
 		LabelNode hbox = vbox.provideChildNode();
 
 		node.addText("hello&#92;nworld");
-		node.addLine();
 		node.addRotatedLabel(vbox);
 		vbox.addText("b");
-		vbox.addLine();
 		vbox.addRotatedLabel(hbox);
 		hbox.addText("c");
-		hbox.addLine();
 		hbox.addText("d");
-		hbox.addLine();
 		hbox.addText("e");
-		vbox.addLine();
 		vbox.addText("f");
-		node.addLine();
 		node.addText("g");
-		node.addLine();
 		node.addText("h");
 
 		return node;
@@ -157,26 +144,19 @@ public /* abstract */ class DotRecordBasedJavaFxNode extends HBox {
 	 * Mrecord label = "hello&#92;nworld |{ b |{c|<here> d|e}| f}| g | h"
 	 */
 	public static DotRecordBasedJavaFxNode createExample05_3() {
-		RootNode node = new RootNode();
+		RootNode node = new RootNode(MRECORD_BORDER);
 		LabelNode vbox = node.provideChildNode();
 		LabelNode hbox = node.provideChildNode();
 
 		node.addText("hello&#92;nworld");
-		node.addLine();
 		node.addRotatedLabel(vbox);
 		vbox.addText("b");
-		vbox.addLine();
 		vbox.addRotatedLabel(hbox);
 		hbox.addText("c");
-		hbox.addLine();
 		hbox.addText("d");
-		hbox.addLine();
 		hbox.addText("e");
-		vbox.addLine();
 		vbox.addText("f");
-		node.addLine();
 		node.addText("g");
-		node.addLine();
 		node.addText("h");
 
 		return node;
@@ -234,7 +214,7 @@ public /* abstract */ class DotRecordBasedJavaFxNode extends HBox {
 			setPrefWidth(35);
 			setMaxWidth(35);
 			setMinHeight(0);
-			getChildren().add((Node) label);
+			super.addRotatedLabel(label);
 		}
 
 	}
