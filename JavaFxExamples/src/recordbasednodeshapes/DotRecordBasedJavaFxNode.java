@@ -4,9 +4,11 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.Border;
@@ -18,90 +20,59 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 
-public class DotRecordBasedJavaFxNode extends HBox {
+public /*abstract*/ class DotRecordBasedJavaFxNode extends HBox {
 
+	
+	private static Border RECORD_BORDER = new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(0), BorderWidths.DEFAULT));
+	private static Border MRECORD_BORDER = new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT));
+	private static Insets TEXT_MARGINS = new Insets(0, 5, 0, 5);
+
+	
 	public DotRecordBasedJavaFxNode(/*String dotLabel, boolean useRoundedBorders*/) {
-		// TODO: implement a general solution
+		RootNode(RECORD_BORDER);
 	}
 	
 	/**
 	 * label = "A | B | C | D"
 	 */
 	public static DotRecordBasedJavaFxNode createExample01() {
-        DotRecordBasedJavaFxNode node = new DotRecordBasedJavaFxNode();
+        DotRecordBasedJavaFxNode node = new RootNode();
         
-		Text text1 = new Text("A");
-//		Line line = new Line();
-//		line.setStartY(node.getHeight());
-//		line.setEndY(0);
-//		line.setStartX(0);
-//		line.setEndX(0);
-//		line.setStroke(Color.BLACK);
-		Separator separator = new Separator(Orientation.VERTICAL);
-		separator.setStyle("border-color:#000000;");
-		separator.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, BorderWidths.DEFAULT)));
-//		separator.set
-        Text text2 = new Text("B");
-        Text text3 = new Text("C");
-        Text text4 = new Text("D");
-
-        // should be used only for debugging purposes, find a better solution to draw grid borders
-      //  node.(true);
-        
-//        GridPane.setMargin(text1, new Insets(10,5,10,5));
-//        GridPane.setMargin(text2, new Insets(10,5,10,5));
-//        GridPane.setMargin(text3, new Insets(10,5,10,5));
-//        GridPane.setMargin(text4, new Insets(10,5,10,5));
-        
-//        node.add(text1, 0, 0, 1, 1);
-//        node.add(text2, 1, 0, 1, 1);
-//        node.add(text3, 2, 0, 1, 1);
-//        node.add(text4, 3, 0, 1, 1);
-        node.setAlignment(Pos.CENTER);
-        node.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(0), BorderWidths.DEFAULT)));
-        node.setSpacing(5);
-        node.setMinHeight(35);
-        node.setWidth(200);
-        node.setMaxWidth(0);
-        node.setPadding(new Insets(0, 5, 0, 5));
-        
-        node.getChildren().add(text1);
-        node.getChildren().add(node.new RecordBasedLabelLine(node.getContentBias()));
-        node.getChildren().add(text2);
-        node.getChildren().add(text3);
-        node.getChildren().add(text4);
+		node.addText("A");
+        node.getChildren().add(node.new RecordBasedLabelLine(Orientation.HORIZONTAL));
+		node.addText("B");
+        node.getChildren().add(node.new RecordBasedLabelLine(Orientation.HORIZONTAL));
+		node.addText("C");
+        node.getChildren().add(node.new RecordBasedLabelLine(Orientation.HORIZONTAL));
+		node.addText("D");
 
         return node;
 	}
+
 
 	/**
 	 * label = "{A | B | C | D}" 
 	 */
 	public static DotRecordBasedJavaFxNode createExample02() {
-		DotRecordBasedJavaFxNode node = new DotRecordBasedJavaFxNode();
+		DotRecordBasedJavaFxNode node = new RootNode();
 		
-//		Text text1 = new Text("A");
-//        Text text2 = new Text("B");
-//        Text text3 = new Text("C");
-//        Text text4 = new Text("D");
-//
-//        // should be used only for debugging purposes, find a better solution to draw grid borders
-//        node.setGridLinesVisible(true);
-//        
-//        GridPane.setMargin(text1, new Insets(10,5,10,5));
-//        GridPane.setMargin(text2, new Insets(10,5,10,5));
-//        GridPane.setMargin(text3, new Insets(10,5,10,5));
-//        GridPane.setMargin(text4, new Insets(10,5,10,5));
-//        
-//        node.add(text1, 0, 0, 1, 1);
-//        node.add(text2, 0, 1, 1, 1);
-//        node.add(text3, 0, 2, 1, 1);
-//        node.add(text4, 0, 3, 1, 1);
+		VLabelNode vbox = node.new VLabelNode();
         
+		node.getChildren().add(vbox);
+
+		vbox.addText("A");
+		vbox.addLine();
+		vbox.addText("B");
+        vbox.addLine();
+		vbox.addText("C");
+		vbox.addLine();
+		vbox.addText("D");
+		
         return node;
 	}
 
@@ -109,26 +80,19 @@ public class DotRecordBasedJavaFxNode extends HBox {
 	 * label = "A | { B | C } | D"
 	 */
 	public static DotRecordBasedJavaFxNode createExample03() {
-		DotRecordBasedJavaFxNode node = new DotRecordBasedJavaFxNode();
-//
-//		Text text1 = new Text("A");
-//        Text text2 = new Text("B");
-//        Text text3 = new Text("C");
-//        Text text4 = new Text("D");
-//
-//        // should be used only for debugging purposes, find a better solution to draw grid borders
-//        node.setGridLinesVisible(true);
-//        
-//        GridPane.setMargin(text1, new Insets(10,5,10,5));
-//        GridPane.setMargin(text2, new Insets(5,5,5,5));
-//        GridPane.setMargin(text3, new Insets(5,5,5,5));
-//        GridPane.setMargin(text4, new Insets(10,5,10,5));
-//        
-//        node.add(text1, 0, 0, 1, 2);
-//        node.add(text2, 1, 0, 1, 1);
-//        node.add(text3, 1, 1, 1, 1);
-//        node.add(text4, 2, 0, 1, 2);
+		LabelNode node = new RootNode();
+		
+		VLabelNode vbox = node.new VLabelNode();
         
+		node.addText("A");
+		node.addLine();
+		node.getChildren().add(vbox);
+		vbox.addText("B");
+        vbox.addLine();
+		vbox.addText("C");
+        node.addLine();
+		node.addText("D");
+		
         return node;
 	}
 
@@ -136,32 +100,94 @@ public class DotRecordBasedJavaFxNode extends HBox {
 	 * label = "<f0> left|<f1> mid&#92; dle|<f2> right"
 	 */
 	public static DotRecordBasedJavaFxNode createExample04_1() {
-		// TODO: instead of using the example01, provide implementation for example04_1
-		DotRecordBasedJavaFxNode node = new DotRecordBasedJavaFxNode();
+DotRecordBasedJavaFxNode node = new RootNode();
 		
-		Text text1 = new Text("left");
-		Text text2 = new Text("mid dle");
-		Text text3 = new Text("right");
+		VLabelNode vbox = node.new VLabelNode();
+        
+		node.addText("left");
+		node.addLine();
+		node.addText("mid dle");
+        node.addLine();
+		node.addText("right");
 		
-		
-		return createExample01();
+        return node;
 	}
 
 	/**
 	 * label = "<f0> one|<f1> two"
 	 */
 	public static DotRecordBasedJavaFxNode createExample04_2() {
-		// TODO: instead of using the example01, provide implementation for example04_2
-		return createExample01();
+		DotRecordBasedJavaFxNode node = new RootNode();
+		
+		VLabelNode vbox = node.new VLabelNode();
+        
+		node.addText("one");
+		node.addLine();
+		node.addText("two");
+		
+        return node;
 	}
 
 	/**
 	 * label = "hello&#92;nworld |{ b |{c|<here> d|e}| f}| g | h"
 	 */
 	public static DotRecordBasedJavaFxNode createExample04_3() {
-		// TODO: instead of using the example01, provide implementation for example04_3
-		return createExample01();
+		DotRecordBasedJavaFxNode node = new RootNode(MRECORD_BORDER);
+		
+		VLabelNode vbox = node.new VLabelNode();
+		DotRecordBasedJavaFxNode hbox = new DotRecordBasedJavaFxNode();
+        
+		node.addText("hello&#92;nworld");
+		node.addLine();
+		node.getChildren().add(vbox);
+		vbox.addText("b");
+        vbox.addLine();
+        vbox.getChildren().add(hbox);
+		hbox.addText("c");
+		hbox.addLine();
+		hbox.addText("d");
+		hbox.addLine();
+		hbox.addText("e");
+		vbox.addLine();
+		vbox.addText("f");
+		node.addLine();
+		node.addText("g");
+		node.addLine();
+		node.addText("h");
+		
+        return node;
 	}
+	
+	/**
+	 * Mrecord
+	 * label = "hello&#92;nworld |{ b |{c|<here> d|e}| f}| g | h"
+	 */
+	public static DotRecordBasedJavaFxNode createExample05_3() {
+		LabelNode node = new RootNode();
+		LabelNode vbox = node.provideChildNode();
+		LabelNode hbox = node.provideChildNode();
+        
+		node.addText("hello&#92;nworld");
+		node.addLine();
+		node.getChildren().add(vbox);
+		vbox.addText("b");
+        vbox.addLine();
+        vbox.getChildren().add(hbox);
+		hbox.addText("c");
+		hbox.addLine();
+		hbox.addText("d");
+		hbox.addLine();
+		hbox.addText("e");
+		vbox.addLine();
+		vbox.addText("f");
+		node.addLine();
+		node.addText("g");
+		node.addLine();
+		node.addText("h");
+		
+        return node;
+	}
+	
 	
     // TODO: define further cerateExample... methods
 	
@@ -188,4 +214,79 @@ public class DotRecordBasedJavaFxNode extends HBox {
 			super.resize(width, height);
 		}		
 	}
+	
+
+	
+	private interface LabelNode {
+		public void addText(String string);
+		public void addLine();
+		public void addRotatedLabel(LabelNode label);
+		public LabelNode provideChildNode();
+	}
+	
+	private static class RootNode extends HLabelNode {
+		public RootNode() {
+	        this(RECORD_BORDER);
+		}
+		
+		public RootNode(Border border) {
+	        setBorder(border);
+	        setMinHeight(35);
+	        setMaxWidth(0);
+		}	
+	}
+	
+	private static class HLabelNode extends DotRecordBasedJavaFxNode implements LabelNode {
+		public HLabelNode() {
+	        setAlignment(Pos.CENTER);
+		}
+		
+		public void addText(String string) {
+			Text text = new Text(string);
+			setMargin(text, TEXT_MARGINS);
+	        getChildren().add(text);
+		}
+		
+		public void addLine() {
+			getChildren().add(new RecordBasedLabelLine(Orientation.HORIZONTAL));
+		}
+
+		@Override
+		public LabelNode provideChildNode() {
+			return new VLabelNode();
+		}
+
+		@Override
+		public void addRotatedLabel(LabelNode label) {
+			//can't do this any different due to polymorphism not being possible.
+			getChildren().add((Node) label);
+		}
+	}
+	
+	private class VLabelNode extends VBox implements LabelNode {	
+		public VLabelNode() {
+	        setAlignment(Pos.CENTER);
+		}
+		
+		public void addText(String string) {
+			Text text = new Text(string);
+			setMargin(text, TEXT_MARGINS);
+	        getChildren().add(text);
+		}
+		
+		public void addLine() {
+			getChildren().add(new RecordBasedLabelLine(Orientation.VERTICAL));
+		}
+		
+		@Override
+		public LabelNode provideChildNode() {
+			return new HLabelNode();
+		}
+
+		@Override
+		public void addRotatedLabel(LabelNode label) {
+			getChildren().add((Node) label);			
+		}
+	}
+	
 }
