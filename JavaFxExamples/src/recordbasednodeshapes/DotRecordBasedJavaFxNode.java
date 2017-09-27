@@ -16,6 +16,7 @@ import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -40,7 +41,7 @@ public class DotRecordBasedJavaFxNode extends HBox {
 	/**
 	 * label = "A | B | C | D"
 	 */
-	public static DotRecordBasedJavaFxNode createExample01() {
+	public static Node createExample01() {
 		RootNode root = new RootNode();
 
 		root.addText("A");
@@ -48,13 +49,13 @@ public class DotRecordBasedJavaFxNode extends HBox {
 		root.addText("C");
 		root.addText("D");
 
-		return root;
+		return root.getFxElement();
 	}
 
 	/**
 	 * label = "{A | B | C | D}"
 	 */
-	public static DotRecordBasedJavaFxNode createExample02() {
+	public static Node createExample02() {
 		RootNode node = new RootNode();
 
 		LabelNode vbox = node.provideChildNode();
@@ -66,13 +67,13 @@ public class DotRecordBasedJavaFxNode extends HBox {
 		vbox.addText("C");
 		vbox.addText("D");
 
-		return node;
+		return node.getFxElement();
 	}
 
 	/**
 	 * label = "A | { B | C } | D"
 	 */
-	public static DotRecordBasedJavaFxNode createExample03() {
+	public static Node createExample03() {
 		RootNode node = new RootNode();
 
 		LabelNode vbox = node.provideChildNode();
@@ -83,38 +84,38 @@ public class DotRecordBasedJavaFxNode extends HBox {
 		vbox.addText("C");
 		node.addText("D");
 
-		return node;
+		return node.getFxElement();
 	}
 
 	/**
 	 * label = "<f0> left|<f1> mid&#92; dle|<f2> right"
 	 */
-	public static DotRecordBasedJavaFxNode createExample04_1() {
+	public static Node createExample04_1() {
 		RootNode node = new RootNode();
 
 		node.addText("left");
 		node.addText("mid dle");
 		node.addText("right");
 
-		return node;
+		return node.getFxElement();
 	}
 
 	/**
 	 * label = "<f0> one|<f1> two"
 	 */
-	public static DotRecordBasedJavaFxNode createExample04_2() {
+	public static Node createExample04_2() {
 		RootNode node = new RootNode();
 
 		node.addText("one");
 		node.addText("two");
 
-		return node;
+		return node.getFxElement();
 	}
 
 	/**
 	 * label = "hello&#92;nworld |{ b |{c|<here> d|e}| f}| g | h"
 	 */
-	public static DotRecordBasedJavaFxNode createExample04_3() {
+	public static Node createExample04_3() {
 		RootNode node = new RootNode();
 
 		LabelNode vbox = node.provideChildNode();
@@ -131,38 +132,38 @@ public class DotRecordBasedJavaFxNode extends HBox {
 		node.addText("g");
 		node.addText("h");
 
-		return node;
+		return node.getFxElement();
 	}
 
 	/**
 	 * Mrecord label = "<f0> left|<f1> mid&#92; dle|<f2> right"
 	 */
-	public static DotRecordBasedJavaFxNode createExample05_1() {
+	public static Node createExample05_1() {
 		RootNode node = new RootNode(MRECORD_BORDER);
 
 		node.addText("left");
 		node.addText("mid dle");
 		node.addText("right");
 
-		return node;
+		return node.getFxElement();
 	}
 
 	/**
 	 * Mrecord label = "<f0> one|<f1> two"
 	 */
-	public static DotRecordBasedJavaFxNode createExample05_2() {
+	public static Node createExample05_2() {
 		RootNode node = new RootNode(MRECORD_BORDER);
 
 		node.addText("one");
 		node.addText("two");
 
-		return node;
+		return node.getFxElement();
 	}
 
 	/**
 	 * Mrecord label = "hello&#92;nworld |{ b |{c|<here> d|e}| f}| g | h"
 	 */
-	public static DotRecordBasedJavaFxNode createExample05_3() {
+	public static Node createExample05_3() {
 		RootNode node = new RootNode(MRECORD_BORDER);
 		LabelNode vbox = node.provideChildNode();
 		LabelNode hbox = vbox.provideChildNode();
@@ -178,43 +179,43 @@ public class DotRecordBasedJavaFxNode extends HBox {
 		node.addText("g");
 		node.addText("h");
 
-		return node;
+		return node.getFxElement();
 	}
 
 	// example06_1 [label = "<f0> 0x10ba8| <f1>"]
-	public static DotRecordBasedJavaFxNode createExample06_1() {
+	public static Node createExample06_1() {
 		RootNode node = new RootNode();
 
 		node.addText("0x10ba8");
 		node.addText(" ");
 
-		return node;
+		return node.getFxElement();
 	}
 	// example06_2 [label = "<f0> 0xf7fc4380| <f1> | <f2> |-1"]
 
-	public static DotRecordBasedJavaFxNode createExample06_2() {
+	public static Node createExample06_2() {
 		RootNode node = new RootNode();
 
 		node.addText("0xf7fc4380");
 		node.addText(" ");
 		node.addText(" ");
 		node.addText("-1");
-		return node;
+		return node.getFxElement();
 	}
 
 	// example06_3 [label = "<f0> 3.43322790286038071e-06|44.79998779296875|0"]
-	public static DotRecordBasedJavaFxNode createExample06_3() {
+	public static Node createExample06_3() {
 		RootNode node = new RootNode();
 
 		node.addText("3.43322790286038071e-06");
 		node.addText("44.79998779296875");
 		node.addText("0");
 
-		return node;
+		return node.getFxElement();
 	}
 
 	// example06_4 [label = "<f0> (nil)| | |-1"]
-	public static DotRecordBasedJavaFxNode createExample06_4() {
+	public static Node createExample06_4() {
 		RootNode node = new RootNode();
 		LabelNode vbox = node.provideChildNode();
 		LabelNode hbox = node.provideChildNode();
@@ -224,11 +225,11 @@ public class DotRecordBasedJavaFxNode extends HBox {
 		node.addText("");
 		node.addText("-1");
 
-		return node;
+		return node.getFxElement();
 	}
 
 	// example07 [label = "<f0> |<f1> G|<f2> "]
-	public static DotRecordBasedJavaFxNode createExample07() {
+	public static Node createExample07() {
 		RootNode node = new RootNode();
 		LabelNode vbox = node.provideChildNode();
 		LabelNode hbox = node.provideChildNode();
@@ -237,11 +238,11 @@ public class DotRecordBasedJavaFxNode extends HBox {
 		node.addText("G");
 		node.addText("");
 
-		return node;
+		return node.getFxElement();
 	}
 
 	// example08_1 [label = "<f0> |<f1> |<f2> |<f3> |<f4> |<f5> |<f6> | "]
-	public static DotRecordBasedJavaFxNode createExample08_1() {
+	public static Node createExample08_1() {
 		RootNode node = new RootNode();
 		LabelNode vbox = node.provideChildNode();
 		LabelNode hbox = node.provideChildNode();
@@ -255,11 +256,11 @@ public class DotRecordBasedJavaFxNode extends HBox {
 		node.addText("");
 		node.addText("");
 
-		return node;
+		return node.getFxElement();
 	}
 
 	// example08_2 [label = "{<n> n14 | 719 |<p> }"]
-	public static DotRecordBasedJavaFxNode createExample08_2() {
+	public static Node createExample08_2() {
 		RootNode root = new RootNode();
 		LabelNode node = root.provideChildNode();
 
@@ -269,12 +270,12 @@ public class DotRecordBasedJavaFxNode extends HBox {
 
 		root.addRotatedLabel(node);
 
-		return root;
+		return root.getFxElement();
 	}
 	// example09_1 [label = "{Animal|+ name : string\l+ age : int\l|+ die() :
 	// void\l}"]
 
-	public static DotRecordBasedJavaFxNode createExample09_1() {
+	public static Node createExample09_1() {
 		RootNode root = new RootNode();
 		LabelNode node = root.provideChildNode();
 
@@ -283,11 +284,11 @@ public class DotRecordBasedJavaFxNode extends HBox {
 		node.addText("+ die() : void\\l");
 
 		root.addRotatedLabel(node);
-		return root;
+		return root.getFxElement();
 	}
 
 	// example09_2 [label = "{Dog||+ bark() : void\l}"]
-	public static DotRecordBasedJavaFxNode createExample09_2() {
+	public static Node createExample09_2() {
 		RootNode root = new RootNode();
 		LabelNode node = root.provideChildNode();
 
@@ -297,11 +298,11 @@ public class DotRecordBasedJavaFxNode extends HBox {
 
 		root.addRotatedLabel(node);
 
-		return root;
+		return root.getFxElement();
 	}
 
 	// example09_3 [label = "{Cat||+ meow() : void\l}"]
-	public static DotRecordBasedJavaFxNode createExample09_3() {
+	public static Node createExample09_3() {
 		RootNode root = new RootNode();
 		LabelNode node = root.provideChildNode();
 
@@ -311,11 +312,11 @@ public class DotRecordBasedJavaFxNode extends HBox {
 
 		root.addRotatedLabel(node);
 
-		return root;
+		return root.getFxElement();
 	}
 
 	// example10_1 [label = "{AbstractSuffixTree|+ text\n+ root|...}"]
-	public static DotRecordBasedJavaFxNode createExample10_1() {
+	public static Node createExample10_1() {
 		RootNode root = new RootNode();
 		LabelNode node = root.provideChildNode();
 
@@ -325,11 +326,11 @@ public class DotRecordBasedJavaFxNode extends HBox {
 
 		root.addRotatedLabel(node);
 
-		return root;
+		return root.getFxElement();
 	}
 
 	// example10_2 [label = "{SimpleSuffixTree|...| + constructTree()\l...}"]
-	public static DotRecordBasedJavaFxNode createExample10_2() {
+	public static Node createExample10_2() {
 		RootNode root = new RootNode();
 		LabelNode node = root.provideChildNode();
 
@@ -339,11 +340,11 @@ public class DotRecordBasedJavaFxNode extends HBox {
 		node.addText("+ constructTree()\\l...");
 
 		root.addRotatedLabel(node);
-		return root;
+		return root.getFxElement();
 	}
 
 	// example10_3 [label = "{CompactSuffixTree|...| + compactNodes()\l...}"]
-	public static DotRecordBasedJavaFxNode createExample10_3() {
+	public static Node createExample10_3() {
 		RootNode root = new RootNode();
 		LabelNode node = root.provideChildNode();
 
@@ -353,11 +354,11 @@ public class DotRecordBasedJavaFxNode extends HBox {
 		node.addText("+ compactNodes()\\l...");
 
 		root.addRotatedLabel(node);
-		return root;
+		return root.getFxElement();
 	}
 
 	// example10_4 [label = "{SuffixTreeNode|...|+ addSuffix(...)\l...}"]
-	public static DotRecordBasedJavaFxNode createExample10_4() {
+	public static Node createExample10_4() {
 		RootNode root = new RootNode();
 		LabelNode node = root.provideChildNode();
 
@@ -367,11 +368,11 @@ public class DotRecordBasedJavaFxNode extends HBox {
 		node.addText("+ addSuffix(...)\\l...");
 
 		root.addRotatedLabel(node);
-		return root;
+		return root.getFxElement();
 	}
 
 	// example10_5 [label = "{SuffixTreeEdge|...|+ compactLabel(...)\l...}"]
-	public static DotRecordBasedJavaFxNode createExample10_5() {
+	public static Node createExample10_5() {
 		RootNode root = new RootNode();
 		LabelNode node = root.provideChildNode();
 
@@ -381,11 +382,11 @@ public class DotRecordBasedJavaFxNode extends HBox {
 		node.addText("+ compactLabel(...)\\l...");
 
 		root.addRotatedLabel(node);
-		return root;
+		return root.getFxElement();
 	}
 
 	// example11_1 [label="{<f0> 1.0|<f1> One process here\n\n\n}" shape=Mrecord]
-	public static DotRecordBasedJavaFxNode createExample11_1() {
+	public static Node createExample11_1() {
 		RootNode root = new RootNode(MRECORD_BORDER);
 		LabelNode node = root.provideChildNode();
 
@@ -393,11 +394,11 @@ public class DotRecordBasedJavaFxNode extends HBox {
 		node.addText("One process here\\n\\n\\n");
 
 		root.addRotatedLabel(node);
-		return root;
+		return root.getFxElement();
 	}
 
 	// example11_2 [label="{<f0> 2.0|<f1> Other process here\n\n\n}" shape=Mrecord]
-	public static DotRecordBasedJavaFxNode createExample11_2() {
+	public static Node createExample11_2() {
 		RootNode root = new RootNode(MRECORD_BORDER);
 		LabelNode node = root.provideChildNode();
 
@@ -405,31 +406,31 @@ public class DotRecordBasedJavaFxNode extends HBox {
 		node.addText("Other process here\\n\\n\\n");
 
 		root.addRotatedLabel(node);
-		return root;
+		return root.getFxElement();
 	}
 
 	// example11_3 [label="<f0> |<f1> Data store one"]
-	public static DotRecordBasedJavaFxNode createExample11_3() {
+	public static Node createExample11_3() {
 		RootNode node = new RootNode();
 
 		node.addText(" ");
 		node.addText("Data store one");
 
-		return node;
+		return node.getFxElement();
 	}
 
 	// example11_4 [label="<f0> |<f1> Data store two"]
-	public static DotRecordBasedJavaFxNode createExample11_4() {
+	public static Node createExample11_4() {
 		RootNode node = new RootNode();
 
 		node.addText(" ");
 		node.addText("Data store two");
 
-		return node;
+		return node.getFxElement();
 	}
 
 	// example12_1 [label="{{SPACE|24}|00}"]
-	public static DotRecordBasedJavaFxNode createExample12_1() {
+	public static Node createExample12_1() {
 		RootNode root = new RootNode();
 		LabelNode node = root.provideChildNode();
 		LabelNode subnode = node.provideChildNode();
@@ -440,11 +441,11 @@ public class DotRecordBasedJavaFxNode extends HBox {
 		subnode.addText("24");
 		node.addText("00");
 
-		return root;
+		return root.getFxElement();
 	}
 
 	// example12_2 [label="{{DOT|1}|0101010}"]
-	public static DotRecordBasedJavaFxNode createExample12_2() {
+	public static Node createExample12_2() {
 		RootNode root = new RootNode();
 		LabelNode node = root.provideChildNode();
 		LabelNode subnode = node.provideChildNode();
@@ -455,11 +456,11 @@ public class DotRecordBasedJavaFxNode extends HBox {
 		subnode.addText("1");
 		node.addText("0101010");
 
-		return root;
+		return root.getFxElement();
 	}
 
 	// example12_3 [label="{{COMA|1}|0110110}"]
-	public static DotRecordBasedJavaFxNode createExample12_3() {
+	public static Node createExample12_3() {
 		RootNode root = new RootNode();
 		LabelNode node = root.provideChildNode();
 		LabelNode subnode = node.provideChildNode();
@@ -470,11 +471,11 @@ public class DotRecordBasedJavaFxNode extends HBox {
 		subnode.addText("1");
 		node.addText("0110110");
 
-		return root;
+		return root.getFxElement();
 	}
 
 	// example12_4 [label="{{C|6}|11111}"]
-	public static DotRecordBasedJavaFxNode createExample12_4() {
+	public static Node createExample12_4() {
 		RootNode root = new RootNode();
 		LabelNode node = root.provideChildNode();
 		LabelNode subnode = node.provideChildNode();
@@ -485,11 +486,11 @@ public class DotRecordBasedJavaFxNode extends HBox {
 		subnode.addText("6");
 		node.addText("11111");
 
-		return root;
+		return root.getFxElement();
 	}
 
 	// example13_1 [label = "\n\nDecl|{name|access|decl_flags|extern_c_linkage}"]
-	public static DotRecordBasedJavaFxNode createExample13_1() {
+	public static Node createExample13_1() {
 		RootNode root = new RootNode();
 		LabelNode node = root.provideChildNode();
 
@@ -500,11 +501,11 @@ public class DotRecordBasedJavaFxNode extends HBox {
 		node.addText("decl_flags");
 		node.addText("extern_c_linkage");
 
-		return root;
+		return root.getFxElement();
 	}
 
 	// example13_2 [label = "Nontype_decl|{type}"]
-	public static DotRecordBasedJavaFxNode createExample13_2() {
+	public static Node createExample13_2() {
 		RootNode root = new RootNode();
 		LabelNode node = root.provideChildNode();
 
@@ -512,11 +513,11 @@ public class DotRecordBasedJavaFxNode extends HBox {
 		root.addRotatedLabel(node);
 		node.addText("type");
 
-		return root;
+		return root.getFxElement();
 	}
 
 	// example13_3 [label = "Function_decl|{formals|defaults}"]
-	public static DotRecordBasedJavaFxNode createExample13_3() {
+	public static Node createExample13_3() {
 		RootNode root = new RootNode();
 		LabelNode node = root.provideChildNode();
 
@@ -525,11 +526,11 @@ public class DotRecordBasedJavaFxNode extends HBox {
 		node.addText("formals");
 		node.addText("defaults");
 
-		return root;
+		return root.getFxElement();
 	}
 
 	// example13_4 [label = "Function|{body}"]
-	public static DotRecordBasedJavaFxNode createExample13_4() {
+	public static Node createExample13_4() {
 		RootNode root = new RootNode();
 		LabelNode node = root.provideChildNode();
 
@@ -537,14 +538,14 @@ public class DotRecordBasedJavaFxNode extends HBox {
 		root.addRotatedLabel(node);
 		node.addText("body");
 
-		return root;
+		return root.getFxElement();
 	}
 
 	// example14_1
 	// [label="{org.eclipse.gef.dot.internal.\lDotAttributes.DoubleValidator\n|-
 	// minValue\l|+ DoubleValidator()\l+ validate()\l}"]
 
-	public static DotRecordBasedJavaFxNode createExample14_1() {
+	public static Node createExample14_1() {
 		RootNode root = new RootNode();
 		LabelNode node = root.provideChildNode();
 
@@ -553,13 +554,13 @@ public class DotRecordBasedJavaFxNode extends HBox {
 		node.addText("-minValue\\l");
 		node.addText("+ DoubleValidator()\\l+ validate()\\l");
 
-		return root;
+		return root.getFxElement();
 	}
 
 	// example14_2
 	// [label="{org.eclipse.gef.dot.internal.\lDotAttributes.IAttributeValueValidator\l\<
 	// Double \>\n||+ validate()\l}"]
-	public static DotRecordBasedJavaFxNode createExample14_2() {
+	public static Node createExample14_2() {
 		RootNode root = new RootNode();
 		LabelNode node = root.provideChildNode();
 
@@ -568,12 +569,12 @@ public class DotRecordBasedJavaFxNode extends HBox {
 		node.addText(" ");
 		node.addText("+ validate()\\l");
 
-		return root;
+		return root.getFxElement();
 	}
 
 	// example15_1 [label="{Injector\n||}"]
 
-	public static DotRecordBasedJavaFxNode createExample15_1() {
+	public static Node createExample15_1() {
 		RootNode root = new RootNode();
 		LabelNode node = root.provideChildNode();
 
@@ -582,7 +583,7 @@ public class DotRecordBasedJavaFxNode extends HBox {
 		node.addText(" ");
 		node.addText(" ");
 
-		return root;
+		return root.getFxElement();
 	}
 
 	// example15_2 [label="{org.eclipse.gef.dot.internal.\lDotAttributes\n|+
@@ -596,7 +597,7 @@ public class DotRecordBasedJavaFxNode extends HBox {
 	// _getNameRaw()\l+ _getName()\l+ _getType()\l+ _setNameRaw()\l+ _setName()\land
 	// 314 more...\l- serializeAttributeValue()\l- parseAttributeValue()\l-
 	// validateAttributeRawValue()\l- checkAttributeRawValue()\l}"]
-	public static DotRecordBasedJavaFxNode createExample15_2() {
+	public static Node createExample15_2() {
 		RootNode root = new RootNode();
 		LabelNode node = root.provideChildNode();
 
@@ -607,7 +608,7 @@ public class DotRecordBasedJavaFxNode extends HBox {
 		node.addText(
 				"+ isCluster()\\l+ getContext()\\l+ validateAttributeRawValue()\\l+ _getNameRaw()\\l+ _getName()\\l+ _getNameRaw()\\l+ _getName()\\l+ _getType()\\l+ _setNameRaw()\\l+ _setName()\\land 314 more...\\l- serializeAttributeValue()\\l- parseAttributeValue()\\l- validateAttributeRawValue()\\l- checkAttributeRawValue()\\l");
 
-		return root;
+		return root.getFxElement();
 	}
 
 	private static class RecordBasedLabelLine extends Region {
@@ -634,12 +635,108 @@ public class DotRecordBasedJavaFxNode extends HBox {
 		}
 	}
 
-	private interface LabelNode {
-		public void addText(String string);
+//	private interface LabelNode {
+//		public void addText(String string);
+//
+//		public void addRotatedLabel(LabelNode label);
+//
+//		public LabelNode provideChildNode();
+//	}
 
-		public void addRotatedLabel(LabelNode label);
+	private static abstract class LabelNode {
+		private boolean firstField = true;
 
-		public LabelNode provideChildNode();
+		abstract public Pane getFxElement();
+
+		abstract public LabelNode provideChildNode();
+		
+		public LabelNode childNode() {
+			LabelNode child = provideChildNode();
+			addRotatedLabel(child);
+			return child;
+		}
+
+		public void addText(String string) {
+			separatorUnlessFirstField();
+			Node text = new TextHelper(string).getFxElement();
+			setMargin(text, TEXT_MARGINS);
+			getFxElement().getChildren().add(text);
+		}
+
+		public void addRotatedLabel(LabelNode label) {
+			separatorUnlessFirstField();
+			getFxElement().getChildren().add(label.getFxElement());
+		}
+
+		private void separatorUnlessFirstField() {
+			if (!firstField)
+				addLine();
+			else
+				firstField = false;
+		}
+
+		private void addLine() {
+			getFxElement().getChildren().add(new RecordBasedLabelLine(getOrientation()));
+		}
+		
+		abstract protected Orientation getOrientation();
+		abstract protected void setMargin(Node text, Insets insets);
+	}
+	
+	private static class HLabelNode extends LabelNode {
+		private HBox fxElement;
+		
+		public HLabelNode() {
+			fxElement.setAlignment(Pos.CENTER);
+		}
+		
+		@Override
+		public HBox getFxElement() {
+			return fxElement;
+		}
+		
+		@Override
+		public LabelNode provideChildNode() {
+			return new VLabelNode();
+		}
+
+		@Override
+		protected Orientation getOrientation() {
+			return Orientation.HORIZONTAL;
+		}
+
+		@Override
+		protected void setMargin(Node text, Insets insets) {
+			HBox.setMargin(text, insets);
+		}
+	}
+
+	private static class VLabelNode extends LabelNode {
+		private VBox fxElement;
+
+		public VLabelNode() {
+			fxElement.setAlignment(Pos.CENTER);
+		}
+
+		@Override
+		public VBox getFxElement() {
+			return fxElement;
+		}
+
+		@Override
+		public LabelNode provideChildNode() {
+			return new HLabelNode();
+		}
+
+		@Override
+		protected Orientation getOrientation() {
+			return Orientation.VERTICAL;
+		}
+
+		@Override
+		protected void setMargin(Node text, Insets insets) {
+			VBox.setMargin(text, insets);
+		}
 	}
 
 	private static class RootNode extends HLabelNode {
@@ -648,95 +745,19 @@ public class DotRecordBasedJavaFxNode extends HBox {
 		}
 
 		public RootNode(Border border) {
-			setBorder(border);
-			setPrefHeight(PREF_HEIGHT);
-			setPrefWidth(PREF_WIDTH);
+			getFxElement().setBorder(border);
+			getFxElement().setPrefHeight(PREF_HEIGHT);
+			getFxElement().setPrefWidth(PREF_WIDTH);
 
 			// TODO check if there is a better way to achieve this
-			setMaxHeight(USE_PREF_SIZE);
-			setMaxWidth(USE_PREF_SIZE);
+			getFxElement().setMaxHeight(USE_PREF_SIZE);
+			getFxElement().setMaxWidth(USE_PREF_SIZE);
 		}
 
 		@Override
 		public void addRotatedLabel(LabelNode label) {
-			setHgrow((Node) label, Priority.ALWAYS);
+			HBox.setHgrow(label.getFxElement(), Priority.ALWAYS);
 			super.addRotatedLabel(label);
-		}
-
-	}
-
-	private static class HLabelNode extends DotRecordBasedJavaFxNode implements LabelNode {
-		boolean firstField = true;
-
-		public HLabelNode() {
-			setAlignment(Pos.CENTER);
-		}
-
-		@Override
-		public LabelNode provideChildNode() {
-			return new VLabelNode();
-		}
-
-		public void addText(String string) {
-			separatorUnlessFirstField();
-			Node text = new TextHelper(string).getNode();
-			setMargin(text, TEXT_MARGINS);
-			getChildren().add(text);
-		}
-
-		@Override
-		public void addRotatedLabel(LabelNode label) {
-			separatorUnlessFirstField();
-			getChildren().add((Node) label);
-		}
-
-		private void separatorUnlessFirstField() {
-			if (!firstField)
-				addLine();
-			else
-				firstField = false;
-		}
-
-		private void addLine() {
-			getChildren().add(new RecordBasedLabelLine(Orientation.HORIZONTAL));
-		}
-
-	}
-
-	private static class VLabelNode extends VBox implements LabelNode {
-		boolean firstField = true;
-
-		public VLabelNode() {
-			setAlignment(Pos.CENTER);
-		}
-
-		@Override
-		public LabelNode provideChildNode() {
-			return new HLabelNode();
-		}
-
-		public void addText(String string) {
-			separatorUnlessFirstField();
-			Node text = new TextHelper(string).getNode();
-			setMargin(text, TEXT_MARGINS);
-			getChildren().add(text);
-		}
-
-		@Override
-		public void addRotatedLabel(LabelNode label) {
-			separatorUnlessFirstField();
-			getChildren().add((Node) label);
-		}
-
-		private void separatorUnlessFirstField() {
-			if (!firstField)
-				addLine();
-			else
-				firstField = false;
-		}
-
-		private void addLine() {
-			getChildren().add(new RecordBasedLabelLine(Orientation.VERTICAL));
 		}
 
 	}
@@ -763,7 +784,7 @@ public class DotRecordBasedJavaFxNode extends HBox {
 			this.string = string.replaceAll("\\\\(\\s)", "$1");
 		}
 
-		public Node getNode() {
+		public Node getFxElement() {
 			VBox textContainer = new VBox();
 			textContainer.setAlignment(Pos.CENTER);
 			List<TextLine> lines = makeLines(string);
