@@ -664,8 +664,8 @@ public /* abstract */ class DotRecordBasedJavaFxNode extends HBox {
 
 		public RootNode(Border border) {
 			setBorder(border);
-			setPrefHeight(30);
-			setPrefWidth(45);
+			setPrefHeight(34);
+			setPrefWidth(51);
 //			minHeightProperty().addListener(e -> recalculateHeight());
 //			minWidthProperty().addListener(e -> recalculateWidth());
 			

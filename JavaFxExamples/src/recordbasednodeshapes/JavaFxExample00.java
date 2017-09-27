@@ -156,6 +156,8 @@ public class JavaFxExample00 extends Application {
 
 		ScrollPane scroll = new ScrollPane(examplesVerticalBox);
 		
+		examplesVerticalBox.setStyle("-fx-fill: white; -fx-font-size: 14; -fx-font-family: \"Times New Roman\";");
+		
 		Scene scene = new Scene(scroll, 500, 500);
 		primaryStage.setScene(scene);
 		primaryStage.show();
