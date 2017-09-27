@@ -1,6 +1,9 @@
 package recordbasednodeshapes;
 
 import javafx.application.Application;
+import javafx.geometry.Pos;
+import javafx.print.PageLayout;
+import javafx.print.PrinterJob;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
@@ -69,18 +72,21 @@ public class JavaFxExample00 extends Application {
 		examplesVerticalBox.getChildren().add(dotRecordBasedJavaFxNodeExample03);
 
 		HBox example4HorizontalBox = new HBox(20);
+		example4HorizontalBox.setAlignment(Pos.CENTER_LEFT);
 		example4HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample04_1);
 		example4HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample04_2);
 		example4HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample04_3);
 		examplesVerticalBox.getChildren().add(example4HorizontalBox);
 
 		HBox example5HorizontalBox = new HBox(20);
+		example5HorizontalBox.setAlignment(Pos.CENTER_LEFT);
 		example5HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample05_1);
 		example5HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample05_2);
 		example5HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample05_3);
 		examplesVerticalBox.getChildren().add(example5HorizontalBox);
 
 		HBox example6HorizontalBox = new HBox(20);
+		example6HorizontalBox.setAlignment(Pos.CENTER_LEFT);
 		example6HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample06_1);
 		example6HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample06_2);
 		example6HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample06_3);
@@ -90,17 +96,21 @@ public class JavaFxExample00 extends Application {
 		examplesVerticalBox.getChildren().add(dotRecordBasedJavaFxNodeExample07);
 
 		HBox example8HorizontalBox = new HBox(20);
+		example8HorizontalBox.setAlignment(Pos.CENTER_LEFT);
 		example8HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample08_1);
 		example8HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample08_2);
 		examplesVerticalBox.getChildren().add(example8HorizontalBox);
 
 		HBox example9HorizontalBox = new HBox(20);
+		example9HorizontalBox.setAlignment(Pos.CENTER_LEFT);
 		example9HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample09_1);
 		example9HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample09_2);
 		example9HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample09_3);
 		examplesVerticalBox.getChildren().add(example9HorizontalBox);
 
 		HBox example10HorizontalBox = new HBox(20);
+		example10HorizontalBox.setAlignment(Pos.CENTER_LEFT);
+
 		example10HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample10_1);
 		example10HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample10_2);
 		example10HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample10_3);
@@ -109,6 +119,7 @@ public class JavaFxExample00 extends Application {
 		examplesVerticalBox.getChildren().add(example10HorizontalBox);
 
 		HBox example11HorizontalBox = new HBox(20);
+		example11HorizontalBox.setAlignment(Pos.CENTER_LEFT);
 		example11HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample11_1);
 		example11HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample11_2);
 		example11HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample11_3);
@@ -116,6 +127,7 @@ public class JavaFxExample00 extends Application {
 		examplesVerticalBox.getChildren().add(example11HorizontalBox);
 
 		HBox example12HorizontalBox = new HBox(20);
+		example12HorizontalBox.setAlignment(Pos.CENTER_LEFT);
 		example12HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample12_1);
 		example12HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample12_2);
 		example12HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample12_3);
@@ -123,6 +135,7 @@ public class JavaFxExample00 extends Application {
 		examplesVerticalBox.getChildren().add(example12HorizontalBox);
 
 		HBox example13HorizontalBox = new HBox(20);
+		example13HorizontalBox.setAlignment(Pos.CENTER_LEFT);
 		example13HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample13_1);
 		example13HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample13_2);
 		example13HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample13_3);
@@ -130,11 +143,13 @@ public class JavaFxExample00 extends Application {
 		examplesVerticalBox.getChildren().add(example13HorizontalBox);
 
 		HBox example14HorizontalBox = new HBox(20);
+		example14HorizontalBox.setAlignment(Pos.CENTER_LEFT);
 		example14HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample14_1);
 		example14HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample14_2);
 		examplesVerticalBox.getChildren().add(example14HorizontalBox);
 
 		HBox example15HorizontalBox = new HBox(20);
+		example15HorizontalBox.setAlignment(Pos.CENTER_LEFT);
 		example15HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample15_1);
 		example15HorizontalBox.getChildren().add(dotRecordBasedJavaFxNodeExample15_2);
 		examplesVerticalBox.getChildren().add(example15HorizontalBox);
@@ -144,6 +159,14 @@ public class JavaFxExample00 extends Application {
 		Scene scene = new Scene(scroll, 500, 500);
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		
+		PrinterJob job = PrinterJob.createPrinterJob();
+		 if(job != null){
+		   job.showPrintDialog(primaryStage); // Window must be your main Stage
+		   job.showPageSetupDialog(primaryStage);
+		   job.printPage(examplesVerticalBox);
+		   job.endJob();
+		 }
 	}
 
 	public static void main(String[] args) {

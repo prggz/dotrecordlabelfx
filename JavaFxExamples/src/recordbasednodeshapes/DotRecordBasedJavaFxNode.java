@@ -664,25 +664,38 @@ public /* abstract */ class DotRecordBasedJavaFxNode extends HBox {
 
 		public RootNode(Border border) {
 			setBorder(border);
-			setMinHeight(30);
-			setMaxWidth(0);
-			setMaxHeight(0);
+			setPrefHeight(30);
+			setPrefWidth(45);
+//			minHeightProperty().addListener(e -> recalculateHeight());
+//			minWidthProperty().addListener(e -> recalculateWidth());
+			
+			//TODO check if there is a better way to achieve this
+			setMaxHeight(USE_PREF_SIZE);
+			setMaxWidth(USE_PREF_SIZE);
+//			setMinWidth(USE_PREF_SIZE);
+//			setMinHeight(USE_PREF_SIZE);
 		}
+
+//		private void recalculateWidth() {
+//			setPrefHeight(Math.max(computeMinWidth(getHeight()), 30));
+//		}
+//
+//		private void recalculateHeight() {
+//			setPrefHeight(Math.max(computeMinHeight(getWidth()), 45));
+//		}
 
 		@Override
 		public void addRotatedLabel(LabelNode label) {
 			setHgrow((Node) label, Priority.ALWAYS);
-			setPrefWidth(45);
-			setMaxWidth(45);
-			setMinHeight(USE_COMPUTED_SIZE);
 			super.addRotatedLabel(label);
 		}
 
-		@Override
-		public void resize(double width, double height) {
-			setMinHeight(Math.max(computeMinHeight(getWidth()), 35));
-			super.resize(width, height);
-		}
+		
+//		@Override
+//		public void resize(double width, double height) {
+//			setMinHeight(Math.max(computeMinHeight(getWidth()), 30));
+//			super.resize(width, height);
+//		}
 	}
 
 	private static class HLabelNode extends DotRecordBasedJavaFxNode implements LabelNode {
