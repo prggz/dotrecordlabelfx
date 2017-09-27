@@ -40,6 +40,9 @@ public /* abstract */ class DotRecordBasedJavaFxNode extends HBox {
 	private static Border MRECORD_BORDER = new Border(
 			new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(10), BorderWidths.DEFAULT));
 	private static Insets TEXT_MARGINS = new Insets(1.5f, 7, 1.5f, 7);
+	private static double SIZE_BASE;
+	private static double PREF_HEIGHT = 3 * SIZE_BASE;
+	private static double PREF_WIDTH = 2 * SIZE_BASE;
 
 	protected DotRecordBasedJavaFxNode(/* String dotLabel, boolean useRoundedBorders */) {
 	}
@@ -625,7 +628,7 @@ public /* abstract */ class DotRecordBasedJavaFxNode extends HBox {
 		return root;
 	}
 
-	private class RecordBasedLabelLine extends Region {
+	private static class RecordBasedLabelLine extends Region {
 		Line line = new Line();
 		BiConsumer<Double, Double> lineResize;
 
@@ -664,8 +667,8 @@ public /* abstract */ class DotRecordBasedJavaFxNode extends HBox {
 
 		public RootNode(Border border) {
 			setBorder(border);
-			setPrefHeight(34);
-			setPrefWidth(51);
+			setPrefHeight(PREF_HEIGHT);
+			setPrefWidth(PREF_WIDTH);
 //			minHeightProperty().addListener(e -> recalculateHeight());
 //			minWidthProperty().addListener(e -> recalculateWidth());
 			
@@ -712,7 +715,7 @@ public /* abstract */ class DotRecordBasedJavaFxNode extends HBox {
 
 		public void addText(String string) {
 			separatorUnlessFirstField();
-			Node text = textHelper(string);
+			Node text = new TextHelper(string).getNode();
 			setMargin(text, TEXT_MARGINS);
 			getChildren().add(text);
 		}
@@ -736,7 +739,7 @@ public /* abstract */ class DotRecordBasedJavaFxNode extends HBox {
 
 	}
 
-	private class VLabelNode extends VBox implements LabelNode {
+	private static class VLabelNode extends VBox implements LabelNode {
 		boolean firstField = true;
 
 		public VLabelNode() {
@@ -750,7 +753,7 @@ public /* abstract */ class DotRecordBasedJavaFxNode extends HBox {
 
 		public void addText(String string) {
 			separatorUnlessFirstField();
-			Node text = textHelper(string);
+			Node text = new TextHelper(string).getNode();
 			setMargin(text, TEXT_MARGINS);
 			getChildren().add(text);
 		}
@@ -784,60 +787,67 @@ public /* abstract */ class DotRecordBasedJavaFxNode extends HBox {
 		}
 	}
 
-	private static Node textHelper(String string) {
-		//HTML unescaped
-		string = StringEscapeUtils.unescapeHtml(string);
-		//Whitespace removed
-		string = string.replaceAll("\t\\s+", "\t").replaceAll(" \\s+", " ").replaceAll("[^ \t&&\\s]+","");
-		//Whitespace unescaped
-		string = string.replaceAll("\\\\(\\s)", "$1");
-		VBox textContainer = new VBox();
-		textContainer.setAlignment(Pos.CENTER);
-		List<TextLine> lines = makeLines(string);
-		for (TextLine line : lines) {
-			HBox alignmentBox = new HBox();
-			alignmentBox.setAlignment(line.pos != null ? line.pos : Pos.CENTER);
-			alignmentBox.getChildren().add(new Text(line.line));
-			textContainer.getChildren().add(alignmentBox);
+	private static class TextHelper {
+		private final String string;
+		
+		public TextHelper(String string) {
+				//HTML unescaped
+				string = StringEscapeUtils.unescapeHtml(string);
+				//Whitespace removed
+				string = string.replaceAll("\t\\s+", "\t").replaceAll(" \\s+", " ").replaceAll("[^ \t&&\\s]+","");
+				//Whitespace unescaped
+				this.string = string.replaceAll("\\\\(\\s)", "$1");
 		}
-		return textContainer;
-	}
-
-
-	private static List<TextLine> makeLines(String string) {
-		List<TextLine> lines = new ArrayList<TextLine>();
-		int index = 0;
-		int indexLast = -1;
-		do {
-			int indexNew = string.indexOf('\\', Math.max(index, indexLast+1));
-			Pos pos = null;
-			String substring;
-			try {
-				substring = string.substring(index, indexNew);
-				switch (string.charAt(indexNew+1)) {
-				case 'n':
-					pos = Pos.CENTER;
-					break;
-				case 'l':
-					pos = Pos.CENTER_LEFT;
-					break;
-				case 'r':
-					pos = Pos.CENTER_RIGHT;
-					break;
-				default:
-					indexLast = indexNew;
-					continue;
-				}
-				index = indexNew + 2;
-			} catch (IndexOutOfBoundsException e) {
-				if (index >= string.length()) break;
-				substring = string.substring(index);
-				index = indexNew;
+		
+		public Node getNode() {
+			VBox textContainer = new VBox();
+			textContainer.setAlignment(Pos.CENTER);
+			List<TextLine> lines = makeLines(string);
+			for (TextLine line : lines) {
+				HBox alignmentBox = new HBox();
+				alignmentBox.setAlignment(line.pos != null ? line.pos : Pos.CENTER);
+				alignmentBox.getChildren().add(new Text(line.line));
+				textContainer.getChildren().add(alignmentBox);
 			}
-			lines.add(new TextLine(substring, pos));
-		} while (index >= 0);
+			return textContainer;
+		}
 
-		return lines;
+		private List<TextLine> makeLines(String string) {
+			List<TextLine> lines = new ArrayList<TextLine>();
+			int index = 0;
+			int indexLast = -1;
+			do {
+				int indexNew = string.indexOf('\\', Math.max(index, indexLast+1));
+				Pos pos = null;
+				String substring;
+				try {
+					substring = string.substring(index, indexNew);
+					switch (string.charAt(indexNew+1)) {
+					case 'n':
+						pos = Pos.CENTER;
+						break;
+					case 'l':
+						pos = Pos.CENTER_LEFT;
+						break;
+					case 'r':
+						pos = Pos.CENTER_RIGHT;
+						break;
+					default:
+						indexLast = indexNew;
+						continue;
+					}
+					index = indexNew + 2;
+				} catch (IndexOutOfBoundsException e) {
+					if (index >= string.length()) break;
+					substring = string.substring(index);
+					index = indexNew;
+				}
+				lines.add(new TextLine(substring, pos));
+			} while (index >= 0);
+
+			return lines;
+		}
 	}
+	
 
 }
